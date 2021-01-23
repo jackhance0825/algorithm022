@@ -1,0 +1,24 @@
+class Solution {
+    public String minWindow(String s, String t) {
+        int[] need = new int[52];
+        int[] window = new int[52];
+        int kinds = 0, left = 0, right = 0, valid = 0, start = 0, len = Integer.MAX_VALUE;
+        for(int i = 0; i < t.length(); i++) {
+            if(need[pos(t.charAt(i))]++ == 0) kinds++;
+        }
+        while (right < s.length()) {
+            int p = pos(s.charAt(right++));// 移动右界
+            if (need[p] > 0 && ++window[p] == need[p]) valid++;
+            while (valid == kinds) {// 移动左界
+                if (right - left < len) len = right - (start = left);
+                p = pos(s.charAt(left++));
+                if (need[p] > 0 && window[p]-- == need[p]) valid--;
+            }
+        }
+        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
+    }
+
+    private int pos(char c) {
+        return c > 'Z' ? c - 'a' + 26 : c - 'A';
+    }
+}
