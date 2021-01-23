@@ -1,7 +1,12 @@
 class Solution {
     long M = 1000000007;
     public int checkRecord(int n) {
-        long A0L0 = 1, A0L1 = 0, A0L2 = 0, A1L0 = 0, A1L1 = 0, A1L2 = 0;
+        long A0L0 = 1, // ..P
+		A0L1 = 0, // ..PL
+		A0L2 = 0, // ..PLL
+		A1L0 = 0, // ..A
+		A1L1 = 0, // ..A..L
+		A1L2 = 0; // ..A..LL
         for(int i = 0; i < n; i++) {
             long _A0L0 = (A0L0 + A0L1 + A0L2) % M;
             long _A0L1 = A0L0;
